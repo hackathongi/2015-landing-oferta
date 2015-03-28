@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="hackathonApp" ng-controller="LandingController">
+<html lang="en">
     <head>
 	<?php 
 	$url="https://demo3532506.mockable.io/items";
@@ -37,7 +37,7 @@
         <meta property="twitter:description" content="{{ job.description }}">
         <meta property="twitter:image" content="{{ job.picture_url }}">
 
-        <title><?= $job["title"] ?></title>
+        <title><?php echo $job["title"]; ?></title>
 
         <link type="text/css" href="css/hackajobs-landing.min.css" rel="stylesheet">
         <script type="text/javascript" src="js/hackajobs-landing-with-dependencies.min.js"></script>
@@ -51,6 +51,29 @@
     </head>
     <body>
         <div class="container wrap">
+            <div class="row logos">
+                <div class="logo-employer col-sm-6">
+                    <img src="" alt="Logo employer" />
+                </div>
+                <div class="logo-wallyjobs col-sm-6">
+                    <img src="" alt="Logo WallyJobs" />
+                </div>
+            </div>
+
+            <div class="row header">
+                <div class="offer-title col-sm-8">
+                    <?php  ?>
+                </div>
+                <div class="offer-share col-sm-4">
+                    <a href="https://www.facebook.com/">
+                        <img src="" alt="Facebook" />
+                    </a>
+                    <a href="https://www.twitter.com/">
+                        <img src="" alt="Twitter" />
+                    </a>
+                </div>
+            </div>
+
             <div class="row header">
                 <div class="col-sm-2">
                     <img src="" alt="Job picture" />

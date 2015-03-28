@@ -1,146 +1,118 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-	<?php
+<?php
+
+    $currentUrl = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+    $actual_link = $_SERVER['REQUEST_URI'];
     
-	$url = "http://apic.wallyjobs.com/jobs/1";
-	
-	$actual_link = $_SERVER['REQUEST_URI'];
-	
-	$parts = explode('/', $actual_link);
-	array_pop($parts);
-	$last = end($parts);
+    $parts = explode('/', $actual_link);
+    array_pop($parts);
+    $last = end($parts);
  
-	$last = 1;
+    $last = 1;
  
-	$url="http:apic.wallyjobs.com/job/$last";
-		
-	//  Initiate curl
-	$ch = curl_init();
-	// Disable SSL verification
-	curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-	// Will return the response, if false it print the response
-	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-	// Set the url
-	curl_setopt($ch, CURLOPT_URL,$url);
-	// Execute
-	$result=curl_exec($ch);
-	// Closing
-	curl_close($ch);
-
-	// Will dump a beauty json :3
-	$job = json_decode($result, true);
-    print_r('<pre>');
-    print_r($job);
-    print_r('</pre>');
-
-	?>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+    $url = "http://apic.wallyjobs.com/jobs/" . $last;
         
-        <meta property="og:type" content="website">
-        <meta property="og:url" content="">
-        <meta property="og:title" content="{{ job.title }}">
-        <meta property="og:description" content="{{ job.description }}">
-        <meta property="og:image" content="{{ job.picture_url }}">
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_URL,$url);
+    $result=curl_exec($ch);
+    curl_close($ch);
+
+    $job = json_decode($result, true);
+    // print_r('<pre>');
+    // print_r($job);
+    // print_r('</pre>');
+
+?>
+
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title><?php echo $job["title"] . ' | WallyJobs'; ?></title>
+
+    <meta property="og:type" content="website">
+        <meta property="og:url" content="<?php echo $currentUrl; ?>">
+        <meta property="og:title" content="<?php echo $job['title']; ?>">
+        <meta property="og:description" content="<?php echo $job['description']; ?>">
+        <meta property="og:image" content="<?php echo $job['picture_url']; ?>">
 
         <meta property="twitter:card" content="summary">
-        <meta property="twitter:url" content="">
-        <meta property="twitter:title" content="{{ job.title }}">
-        <meta property="twitter:description" content="{{ job.description }}">
-        <meta property="twitter:image" content="{{ job.picture_url }}">
+        <meta property="twitter:url" content="<?php echo $currentUrl; ?>">
+        <meta property="twitter:title" content="<?php echo $job['title']; ?>">
+        <meta property="twitter:description" content="<?php echo $job['description']; ?>">
+        <meta property="twitter:image" content="<?php echo $job['picture_url']; ?>">
 
-        <title><?php echo $job["title"] . ' | WallyJobs'; ?></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link type="text/css" href="css/hackajobs-stylesheet.css" rel="stylesheet">
+</head>
+<body>
 
-        <link type="text/css" href="css/hackajobs-landing.min.css" rel="stylesheet">
-        <script type="text/javascript" src="js/hackajobs-landing-with-dependencies.min.js"></script>
+<header>
 
-        <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-        <!--[if lt IE 9]>
-          <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-          <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-        <![endif]-->
-    </head>
-    <body>
-        <div class="container wrap">
-            <div class="row logos">
-                <div class="logo-employer col-sm-6">
-                    <img src="<?php echo $job['picture_url']; ?>" alt="Logo employer" />
-                </div>
-                <div class="logo-wallyjobs col-sm-6">
-                    <img src="" alt="Logo WallyJobs" />
-                </div>
-            </div>
-
-            <div class="row header">
-                <div class="offer-title col-sm-8">
-                    <h1>
-                        <?php echo $job['title']; ?>
-                    </h1>
-                </div>
-                <div class="offer-share col-sm-4">
-                    <a href="https://www.facebook.com/">
-                        <img src="" alt="Facebook" />
-                    </a>
-                    <a href="https://www.twitter.com/">
-                        <img src="" alt="Twitter" />
-                    </a>
-                </div>
-            </div>
-            <div class="row content">
-                <div class="col-sm-12">
-                    <?php echo $job['description']; ?>
-                </div>
-            </div>
-            <div class="row offer-info">
-                <div class="col-sm-12">
-                    <div class="offer-dates">
-                        Start date: <?php echo date('d/m/Y', strtotime($job['start_date'])); ?> –
-                        End date: <?php echo date('d/m/Y', strtotime($job['end_date'])); ?>
-                    </div>
-                    <div class="offer-city">
-                        <?php echo 'Ciutat: ' . $job['city']; ?>
-                    </div>
-                </div>
-            
-            
-            <div class="row offer-join">
-                <div class="col-sm-12">
-                    <button class="btn btn-default">Join!</button>
-                <div>
-            </div>
-			
-			<div class="row">
-				<div class="col-sm-2 col-sm-offset-3">
-					<div class="fb-share-button" 
-					data-href="{{ shared_url }}" 
-					data-layout="box_count">
-					</div>
-				</div>
-				<div class="col-sm-2 col-sm-offset-2">
-					<a class="twitter-share-button" href=" {{ shared_url }}"
-					  data-related="twitterdev"
-					  data-count="vertical">
-					Tweet
-					</a>
-				</div>
-            </div>
-            
+    <div class="container">
+        <div class="wally-logo">
+            <img src="img/wallyJobsLogoHor.svg" alt="WallyJobs"/>
         </div>
-		<div id="fb-root"></div>
-		<!-- Facebook -->
-		<script>(function(d, s, id) {
-		  var js, fjs = d.getElementsByTagName(s)[0];
-		  if (d.getElementById(id)) return;
-		  js = d.createElement(s); js.id = id;
-		  js.src = "//connect.facebook.net/es_LA/sdk.js#xfbml=1&version=v2.3";
-		  fjs.parentNode.insertBefore(js, fjs);
-		}(document, 'script', 'facebook-jssdk'));</script>
-		<!-- Twitter -->
-		<script>
-		window.twttr=(function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],t=window.twttr||{};if(d.getElementById(id))return t;js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);t._e=[];t.ready=function(f){t._e.push(f);};return t;}(document,"script","twitter-wjs"));
-		</script>
-    </body>
+        <div class="clearfix"></div>
+    </div>
+
+</header>
+
+<main>
+    <div class="container">
+        <article class="job-offer offer">
+            <h1 class="offer-title"><?php echo $job['title']; ?></h1>
+            <div class="offer-share">
+                <a class="share-facebook" href="#">Facebook</a>
+                <a class="share-twitter" href="#">Twitter</a>
+            </div>
+            <div class="offer-image">
+                <img src="http://lorempixel.com/g/640/360/" alt="Titol Oferta"/>
+            </div>
+            <div class="offer-description">
+                <p><?php echo $job['description']; ?></p>
+            </div>
+            <hr/>
+            <div class="offer-details">
+                <div class="offer-author-image">
+                    <img src="http://lorempixel.com/g/240/240/" alt="Joan Vilajoana"/>
+                </div>
+                <dl class="offer-author">
+                    <dt>Author:</dt>
+                    <dd>
+                        <a href="#" target="_blank"><?php echo $job['owner']['name']; ?></a>
+                    </dd>
+                </dl>
+                <dl class="offer-date-start">
+                    <dt>Publicada:</dt>
+                    <dd><?php echo date('d-m-Y', strtotime($job['start_date'])); ?></dd>
+                </dl>
+                <dl class="offer-date-end">
+                    <dt>End:</dt>
+                    <dd><?php echo date('d-m-Y', strtotime($job['end_date'])); ?></dd>
+                </dl>
+                <dl class="offer-location">
+                    <dt>Ciutat:</dt>
+                    <dd><?php echo $job['city']; ?></dd>
+                </dl>
+            </div>
+            <hr/>
+            <div class="offer-apply">
+                <a class="btn btn-primary btn-lg" href="#">Apply</a>
+            </div>
+        </article>
+    </div>
+
+</main>
+
+<footer>
+    <p class="small">©2015 Bla bla bla, ...</p>
+</footer>
+
+
+
+<script type="text/javascript" src="js/hackajobs-stylesheet-dependencies.js"></script>
+
+</body>
 </html>

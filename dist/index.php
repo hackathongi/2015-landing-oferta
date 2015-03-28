@@ -27,7 +27,7 @@
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
     curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
     curl_setopt($ch, CURLOPT_HEADER, 1);
-    curl_setopt($ch, CURLOPT_URL, "http://graph.facebook.com/v2.3/" . $job['owner']['facebook_id'] . "/picture?width=120");
+    curl_setopt($ch, CURLOPT_URL, "https://graph.facebook.com/v2.3/" . $job['owner']['facebook_id'] . "/picture?width=120");
     curl_exec($ch);
     $header = curl_getinfo($ch);
     curl_close($ch);

@@ -23,10 +23,6 @@
     $result = curl_exec($ch);
     curl_close($ch);
 
-    print_r('<pre>');
-    print_r($result);
-    print_r('</pre>');
-
     $job = json_decode($result, true);
 
     $ch = curl_init();

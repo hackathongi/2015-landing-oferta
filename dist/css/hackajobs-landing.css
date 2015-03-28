@@ -7132,6 +7132,9 @@ h6 {
 .wrap .offer-join button {
   font-size: 40px;
 }
+.job-offer .offer-share {
+  padding-top: 0px;
+}
 .job-offer .offer-share .share-facebook img,
 .job-offer .offer-share .share-twitter img {
   width: 30px;

@@ -62,7 +62,9 @@
 
             <div class="row header">
                 <div class="offer-title col-sm-8">
-                    <?php  ?>
+                    <h1>
+                        <?php echo 'Offer title'; ?>
+                    </h1>
                 </div>
                 <div class="offer-share col-sm-4">
                     <a href="https://www.facebook.com/">
@@ -73,29 +75,25 @@
                     </a>
                 </div>
             </div>
-
-            <div class="row header">
-                <div class="col-sm-2">
-                    <img src="" alt="Job picture" />
-                </div>
-                <div class="col-sm-10">
-                    <h1>{{ job.title }}</h1>
-                    <h3>Employer name</h3>
-                    <div class="offer-info">
-                        <span>Start date: 01/01/1970  –  End date: 31/12/1970  –  City</span>
-                    </div>
-                </div>
-            </div>
             <div class="row content">
                 <div class="col-sm-12">
                     Lorem ipsum dolor sit amet...
                 </div>
             </div>
-            
-            <div class="row">
-                <div ng-repeat="item in items" >
-                {{ item }}
+            <div class="row offer-info">
+                <div class="col-sm-12">
+                    <div class="offer-dates">
+                        Start date: 01/01/2015 – End date: 31/12/2015
+                    </div>
+                    <div class="offer-city">
+                        Location: Girona
+                    </div>
                 </div>
+            </div>
+            <div class="row offer-join">
+                <div class="col-sm-12">
+                    <button>Join!</button>
+                <div>
             </div>
             
         </div>

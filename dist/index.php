@@ -2,8 +2,17 @@
 <html lang="en">
     <head>
 	<?php 
-	$url="https://demo3532506.mockable.io/items";
 	
+	$actual_link = $_SERVER['REQUEST_URI'];
+	
+	$parts = explode('/', $actual_link);
+	array_pop($parts);
+	$last = end($parts);
+ 
+	$last = 1;
+ 
+	$url="http:apic.wallyjobs.com/job/$last";
+		
 	//  Initiate curl
 	$ch = curl_init();
 	// Disable SSL verification

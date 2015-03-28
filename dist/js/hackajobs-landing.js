@@ -1,7 +1,7 @@
 
 var myApp = angular.module('hackathonApp',[]);
 
-myApp.controller('LandingController', ['$scope', '$http', function($scope, $http) {
+myApp.controller('LandingController', ['$scope', '$http', '$location', function($scope, $http, $location) {
   
 	/*$scope.job = {};
   
@@ -16,4 +16,5 @@ myApp.controller('LandingController', ['$scope', '$http', function($scope, $http
 		// called asynchronously if an error occurs
 		// or server returns response with an error status.
 	  });*/
+	  $scope.shared_url = $location.$$absUrl;
 }]);

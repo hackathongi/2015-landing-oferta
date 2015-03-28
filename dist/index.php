@@ -41,6 +41,7 @@
 
         <link type="text/css" href="css/hackajobs-landing.min.css" rel="stylesheet">
         <script type="text/javascript" src="js/hackajobs-landing-with-dependencies.min.js"></script>
+		<script type="text/javascript" src="js/hackajobs-landing.js"></script>
 
         <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -70,11 +71,34 @@
             </div>
             
             <div class="row">
-                <div ng-repeat="item in items" >
-                {{ item }}
-                </div>
+				<div class="col-sm-2 col-sm-offset-3">
+					<div class="fb-share-button" 
+					data-href="{{ shared_url }}" 
+					data-layout="box_count">
+					</div>
+				</div>
+				<div class="col-sm-2 col-sm-offset-2">
+					<a class="twitter-share-button" href=" {{ shared_url }}"
+					  data-related="twitterdev"
+					  data-count="vertical">
+					Tweet
+					</a>
+				</div>
             </div>
             
         </div>
+		<div id="fb-root"></div>
+		<!-- Facebook -->
+		<script>(function(d, s, id) {
+		  var js, fjs = d.getElementsByTagName(s)[0];
+		  if (d.getElementById(id)) return;
+		  js = d.createElement(s); js.id = id;
+		  js.src = "//connect.facebook.net/es_LA/sdk.js#xfbml=1&version=v2.3";
+		  fjs.parentNode.insertBefore(js, fjs);
+		}(document, 'script', 'facebook-jssdk'));</script>
+		<!-- Twitter -->
+		<script>
+		window.twttr=(function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],t=window.twttr||{};if(d.getElementById(id))return t;js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);t._e=[];t.ready=function(f){t._e.push(f);};return t;}(document,"script","twitter-wjs"));
+		</script>
     </body>
 </html>

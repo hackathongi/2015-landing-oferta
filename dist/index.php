@@ -11,7 +11,7 @@
     }
 
     // $hash = 1;
- 
+
     $url = "https://api.wallyjobs.com/jobs/" . $hash;
         
     $ch = curl_init();
@@ -20,8 +20,6 @@
     curl_setopt($ch, CURLOPT_SSL_VERSION, 3);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
     curl_setopt($ch, CURLOPT_URL, $url);
-    // curl_setopt($ch, CURLOPT_HEADER, 1);
-    // curl_setopt($ch, CURLOPT_VERBOSE, true);
     $result = curl_exec($ch);
     curl_close($ch);
 
@@ -161,8 +159,6 @@
 <footer>
     <p class="small">©2015 Bla bla bla, ...</p>
 </footer>
-
-
 
 <script type="text/javascript" src="/js/hackajobs-stylesheet-dependencies.js"></script>
 

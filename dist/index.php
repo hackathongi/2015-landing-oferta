@@ -12,7 +12,7 @@
 
     // $hash = 1;
  
-    $url = "http://apic.wallyjobs.com/jobs/" . $hash;
+    $url = "https://api.wallyjobs.com/jobs/" . $hash;
         
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
@@ -68,10 +68,6 @@
 
 </header>
 
-<?php
-    echo $hash;
-?>
-
 <main>
     <div class="container">
         <article class="job-offer offer">
@@ -89,7 +85,7 @@
             <hr/>
             <div class="offer-details">
                 <div class="offer-author-image">
-                    <img src="<?php echo $header['url']; ?>" alt="Joan Vilajoana"/>
+                    <img src="<?php echo $header['url']; ?>" alt="<?php echo $job['owner']['name']; ?>"/>
                 </div>
                 <dl class="offer-author">
                     <dt>Autor:</dt>

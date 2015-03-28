@@ -7116,10 +7116,6 @@ h6 {
 .wrap .logos .logo-wallyjobs img {
   float: right;
 }
-.wrap .job-offer .offer-share .share-facebook img,
-.wrap .job-offer .offer-share .share-twitter img {
-  width: 30px;
-}
 .wrap .header {
   margin-top: 40px;
 }
@@ -7135,6 +7131,10 @@ h6 {
 }
 .wrap .offer-join button {
   font-size: 40px;
+}
+.job-offer .offer-share .share-facebook img,
+.job-offer .offer-share .share-twitter img {
+  width: 30px;
 }
 .wrap-bottom .share-title {
   text-align: center;

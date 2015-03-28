@@ -6,7 +6,7 @@
     $parts = explode('/', $actual_link);
 
     $hash = '';
-    if(preg_match('|/([^/]+)/$|', $actual_link, $parts)) {
+    if(preg_match('|/([^/]+)/?$|', $actual_link, $parts)) {
         $hash = $parts[1];
     }
 
@@ -53,7 +53,7 @@
         <meta property="twitter:image" content="<?php echo $job['picture_url']; ?>">
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link type="text/css" href="css/hackajobs-landing.css" rel="stylesheet">
+    <link type="text/css" href="/css/hackajobs-landing.css" rel="stylesheet">
 </head>
 <body>
 
@@ -61,7 +61,7 @@
 
     <div class="container">
         <div class="wally-logo">
-            <img src="img/wallyJobsLogoHor.svg" alt="WallyJobs"/>
+            <img src="/img/wallyJobsLogoHor.svg" alt="WallyJobs"/>
         </div>
         <div class="clearfix"></div>
     </div>
@@ -156,7 +156,7 @@
 
 
 
-<script type="text/javascript" src="js/hackajobs-stylesheet-dependencies.js"></script>
+<script type="text/javascript" src="/js/hackajobs-stylesheet-dependencies.js"></script>
 
 </body>
 </html>

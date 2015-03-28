@@ -4,24 +4,33 @@
     $actual_link = $_SERVER['REQUEST_URI'];
     
     $parts = explode('/', $actual_link);
-    array_pop($parts);
-    $last = end($parts);
+
+    $hash = '';
+    if(preg_match('|/([^/]+)/$|', $actual_link, $parts)) {
+        $hash = $parts[1];
+    }
+
+    // $hash = 1;
  
-    $last = 1;
- 
-    $url = "http://apic.wallyjobs.com/jobs/" . $last;
+    $url = "http://apic.wallyjobs.com/jobs/" . $hash;
         
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
     curl_setopt($ch, CURLOPT_URL,$url);
-    $result=curl_exec($ch);
+    $result = curl_exec($ch);
     curl_close($ch);
 
     $job = json_decode($result, true);
-    // print_r('<pre>');
-    // print_r($job);
-    // print_r('</pre>');
+
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+    curl_setopt($ch, CURLOPT_HEADER, 1);
+    curl_setopt($ch, CURLOPT_URL, "http://graph.facebook.com/v2.3/" . $job['owner']['facebook_id'] . "/picture?width=120");
+    curl_exec($ch);
+    $header = curl_getinfo($ch);
+    curl_close($ch);
 
 ?>
 
@@ -44,7 +53,7 @@
         <meta property="twitter:image" content="<?php echo $job['picture_url']; ?>">
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link type="text/css" href="css/hackajobs-stylesheet.css" rel="stylesheet">
+    <link type="text/css" href="css/hackajobs-landing.css" rel="stylesheet">
 </head>
 <body>
 
@@ -64,11 +73,11 @@
         <article class="job-offer offer">
             <h1 class="offer-title"><?php echo $job['title']; ?></h1>
             <div class="offer-share">
-                <a class="share-facebook" href="#">Facebook</a>
-                <a class="share-twitter" href="#">Twitter</a>
+                <a class="share-facebook" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=<?php echo $currentUrl; ?>">Facebook</a>
+                <a class="share-twitter" target="_blank" href="https://twitter.com/home?status=<?php echo $currentUrl; ?>">Twitter</a>
             </div>
             <div class="offer-image">
-                <img src="http://lorempixel.com/g/640/360/" alt="Titol Oferta"/>
+                <img src="<?php echo $job['picture_url']; ?>" alt="<?php echo $job['title']; ?>"/>
             </div>
             <div class="offer-description">
                 <p><?php echo $job['description']; ?></p>
@@ -76,12 +85,12 @@
             <hr/>
             <div class="offer-details">
                 <div class="offer-author-image">
-                    <img src="http://lorempixel.com/g/240/240/" alt="Joan Vilajoana"/>
+                    <img src="<?php echo $header['url']; ?>" alt="Joan Vilajoana"/>
                 </div>
                 <dl class="offer-author">
-                    <dt>Author:</dt>
+                    <dt>Autor:</dt>
                     <dd>
-                        <a href="#" target="_blank"><?php echo $job['owner']['name']; ?></a>
+                        <a href="https://www.facebook.com/profile.php?id=<?php echo $job['owner']['facebook_id']; ?>" target="_blank"><?php echo $job['owner']['name']; ?></a>
                     </dd>
                 </dl>
                 <dl class="offer-date-start">
@@ -89,7 +98,7 @@
                     <dd><?php echo date('d-m-Y', strtotime($job['start_date'])); ?></dd>
                 </dl>
                 <dl class="offer-date-end">
-                    <dt>End:</dt>
+                    <dt>Finalitza:</dt>
                     <dd><?php echo date('d-m-Y', strtotime($job['end_date'])); ?></dd>
                 </dl>
                 <dl class="offer-location">
@@ -99,10 +108,45 @@
             </div>
             <hr/>
             <div class="offer-apply">
-                <a class="btn btn-primary btn-lg" href="#">Apply</a>
+                <a class="btn btn-primary btn-lg" href="<?php echo 'https://apisocial.wallyjobs.com/login/facebook?urlOK=' . urlencode('http://applicant.wallyjobs.com/login/' . $hash) . '&urlKO="' . urlencode($currentUrl); ?>">Apunta't</a>
             </div>
         </article>
     </div>
+
+    <div class="wrap-bottom container">
+        <div class="row">
+            <div class="share-title col-xs-24">
+                <h2>Compartir</h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="share col-xs-24">
+                <div class="fb-share-button" 
+                    data-href="{{ shared_url }}" 
+                    data-layout="box_count">
+                </div>
+                <a class="twitter-share-button" href=" {{ shared_url }}"
+                  data-related="twitterdev"
+                  data-count="vertical">
+                Tweet
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div id="fb-root"></div>
+    <!-- Facebook -->
+    <script>(function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = "//connect.facebook.net/es_LA/sdk.js#xfbml=1&version=v2.3";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>
+    <!-- Twitter -->
+    <script>
+    window.twttr=(function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],t=window.twttr||{};if(d.getElementById(id))return t;js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);t._e=[];t.ready=function(f){t._e.push(f);};return t;}(document,"script","twitter-wjs"));
+    </script>
 
 </main>
 

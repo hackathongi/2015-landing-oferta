@@ -5,6 +5,13 @@
  * March 2015
  *
  */
+/*
+ * HackaJobs Stylesheet
+ * Main file
+ *
+ * March 2015
+ *
+ */
 /*! normalize.css v3.0.2 | MIT License | git.io/normalize */
 html {
   font-family: sans-serif;
@@ -6818,7 +6825,7 @@ a:active {
 }
 header {
   background-color: #f5f5f5;
-  padding: 20px;
+  padding: 20px 0;
   padding-bottom: 5px;
   border-bottom: solid 2px #988a80;
 }
@@ -6839,11 +6846,58 @@ header .wally-logo img {
     width: 120px;
   }
 }
+.navbar {
+  border-bottom: solid 2px #988a80;
+}
+.navbar:before,
+.navbar:after {
+  content: " ";
+  display: table;
+}
+.navbar:after {
+  clear: both;
+}
+.navbar:before,
+.navbar:after {
+  content: " ";
+  display: table;
+}
+.navbar:after {
+  clear: both;
+}
+.navbar .wally-logo {
+  width: 160px;
+  float: left;
+  position: relative;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  padding-left: 10px;
+}
+.navbar .wally-logo img {
+  width: 100%;
+  height: auto;
+}
 footer {
   background-color: #f5f5f5;
   padding: 15px;
   border-top: solid 2px #988a80;
   text-align: center;
+}
+.breadcrumb {
+  display: none;
+  background-color: transparent;
+  padding: 0;
+  text-align: right;
+  margin-bottom: 0;
+}
+.breadcrumb li + li::before {
+  content: "> ";
+  padding: 0 2px;
+}
+@media (min-width: 768px) {
+  .breadcrumb {
+    display: block;
+  }
 }
 /*
  * !! IMPORTANT !!
@@ -7030,3 +7084,72 @@ h6 {
     height: 120px;
   }
 }
+.new-offer {
+  padding: 20px 0;
+}
+.new-offer:before,
+.new-offer:after {
+  content: " ";
+  display: table;
+}
+.new-offer:after {
+  clear: both;
+}
+.new-offer:before,
+.new-offer:after {
+  content: " ";
+  display: table;
+}
+.new-offer:after {
+  clear: both;
+}
+.new-offer-title {
+  margin-top: 0;
+}
+.wrap {
+  margin-top: 100px;
+}
+.wrap .logos .logo-employer img,
+.wrap .logos .logo-wallyjobs img {
+  width: 250px;
+}
+.wrap .logos .logo-wallyjobs img {
+  float: right;
+}
+.wrap .header {
+  margin-top: 40px;
+}
+.wrap .content .offer-description {
+  font-size: 16px;
+}
+.wrap .offer-info {
+  margin-top: 10px;
+  font-size: 14px;
+}
+.wrap .offer-join {
+  text-align: center;
+}
+.wrap .offer-join button {
+  font-size: 40px;
+}
+.wrap-bottom .share-title {
+  text-align: center;
+  margin-bottom: 40px;
+}
+.wrap-bottom .share {
+  text-align: center;
+  margin-bottom: 50px;
+}
+.wrap-bottom .share .fb-share-button {
+  margin-right: 100px;
+}
+/*
+ * !! IMPORTANT !!
+ *
+ * Think in Mobile First before use mediaQueries.
+ * By default assume that you're working on a XS screen.
+ *
+ * Place each mediaQuery closest to the affected selector,
+ * to keep the code readable.
+ *
+ */

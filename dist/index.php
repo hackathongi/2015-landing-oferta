@@ -68,6 +68,10 @@
 
 </header>
 
+<?php
+    echo $hash;
+?>
+
 <main>
     <div class="container">
         <article class="job-offer offer">

@@ -7116,6 +7116,10 @@ h6 {
 .wrap .logos .logo-wallyjobs img {
   float: right;
 }
+.wrap .job-offer .offer-share .share-facebook img,
+.wrap .job-offer .offer-share .share-twitter img {
+  width: 30px;
+}
 .wrap .header {
   margin-top: 40px;
 }

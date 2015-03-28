@@ -75,8 +75,12 @@
         <article class="job-offer offer">
             <h1 class="offer-title"><?php echo $job['title']; ?></h1>
             <div class="offer-share">
-                <a class="share-facebook" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=<?php echo $currentUrl; ?>">Facebook</a>
-                <a class="share-twitter" target="_blank" href="https://twitter.com/home?status=<?php echo $currentUrl; ?>">Twitter</a>
+                <a class="share-facebook" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=<?php echo $currentUrl; ?>">
+                    <img src="/img/facebook.png" alt="Facebook" />
+                </a>
+                <a class="share-twitter" target="_blank" href="https://twitter.com/home?status=<?php echo $currentUrl; ?>">
+                    <img src="/img/twitter.png" alt="Twitter" />
+                </a>
             </div>
             <div class="offer-image">
                 <img src="<?php echo $job['picture_url']; ?>" alt="<?php echo $job['title']; ?>"/>
@@ -110,7 +114,7 @@
             </div>
             <hr/>
             <div class="offer-apply">
-                <a class="btn btn-primary btn-lg" href="<?php echo 'https://apisocial.wallyjobs.com/login/facebook?urlOK=' . urlencode('http://applicant.wallyjobs.com/login/' . $hash) . '&urlKO="' . urlencode($currentUrl); ?>">Apunta't</a>
+                <a class="btn btn-primary btn-lg" href="<?php echo 'https://apisocial.wallyjobs.com/login/facebook?urlOK=' . urlencode('http://applicant.wallyjobs.com/login/?job_id=' . $hash) . '&urlKO="' . urlencode($currentUrl); ?>">Apunta't</a>
             </div>
         </article>
     </div>

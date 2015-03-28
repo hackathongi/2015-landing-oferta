@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-	<?php 
+	<?php
+    
+	$url = "http://apic.wallyjobs.com/jobs/1";
 	
 	$actual_link = $_SERVER['REQUEST_URI'];
 	
@@ -28,6 +30,9 @@
 
 	// Will dump a beauty json :3
 	$job = json_decode($result, true);
+    print_r('<pre>');
+    print_r($job);
+    print_r('</pre>');
 
 	?>
         <meta charset="utf-8">
@@ -46,11 +51,10 @@
         <meta property="twitter:description" content="{{ job.description }}">
         <meta property="twitter:image" content="{{ job.picture_url }}">
 
-        <title><?php echo $job["title"]; ?></title>
+        <title><?php echo $job["title"] . ' | WallyJobs'; ?></title>
 
         <link type="text/css" href="css/hackajobs-landing.min.css" rel="stylesheet">
         <script type="text/javascript" src="js/hackajobs-landing-with-dependencies.min.js"></script>
-		<script type="text/javascript" src="js/hackajobs-landing.js"></script>
 
         <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -63,7 +67,7 @@
         <div class="container wrap">
             <div class="row logos">
                 <div class="logo-employer col-sm-6">
-                    <img src="" alt="Logo employer" />
+                    <img src="<?php echo $job['picture_url']; ?>" alt="Logo employer" />
                 </div>
                 <div class="logo-wallyjobs col-sm-6">
                     <img src="" alt="Logo WallyJobs" />
@@ -73,7 +77,7 @@
             <div class="row header">
                 <div class="offer-title col-sm-8">
                     <h1>
-                        <?php echo 'Offer title'; ?>
+                        <?php echo $job['title']; ?>
                     </h1>
                 </div>
                 <div class="offer-share col-sm-4">
@@ -87,23 +91,24 @@
             </div>
             <div class="row content">
                 <div class="col-sm-12">
-                    Lorem ipsum dolor sit amet...
+                    <?php echo $job['description']; ?>
                 </div>
             </div>
             <div class="row offer-info">
                 <div class="col-sm-12">
                     <div class="offer-dates">
-                        Start date: 01/01/2015 – End date: 31/12/2015
+                        Start date: <?php echo date('d/m/Y', strtotime($job['start_date'])); ?> –
+                        End date: <?php echo date('d/m/Y', strtotime($job['end_date'])); ?>
                     </div>
                     <div class="offer-city">
-                        Location: Girona
+                        <?php echo 'Ciutat: ' . $job['city']; ?>
                     </div>
                 </div>
             
             
             <div class="row offer-join">
                 <div class="col-sm-12">
-                    <button>Join!</button>
+                    <button class="btn btn-default">Join!</button>
                 <div>
             </div>
 			

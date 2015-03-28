@@ -6833,8 +6833,8 @@ a:active {
  * to keep the code readable.
  *
  */
-.test {
-  border-radius: 2px;
+h1 {
+  color: blue;
 }
 /*
  * !! IMPORTANT !!
